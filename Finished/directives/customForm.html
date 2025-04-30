@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default" style="margin-top: 40px;">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ title }}</h3>
+        </div>
+        <div class="panel-body">
+          <form ng-submit="onSubmit()">
+            <div class="alert alert-danger" ng-if="error">
+              {{ error }}
+            </div>
+            <ng-transclude></ng-transclude>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <div class="text-center" ng-if="url && label">
+            <a ng-href="{{ url }}" class="btn btn-link" style="margin-top: 10px;">Move to {{ label }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

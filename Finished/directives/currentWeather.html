@@ -1,0 +1,25 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <i class="fa fa-sun-o"></i> Clima actual
+            <span class="pull-right">{{ weatherData.location.localtime }}</span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img ng-src="{{ weatherData.current.condition.icon }}" 
+                     style="width: 100px;">
+                <h3>{{ weatherData.current.condition.text }}</h3>
+            </div>
+            <div class="col-md-4">
+                <h2>{{ weatherData.current.temp_c }}°C</h2>
+                <p>Sensación térmica: {{ weatherData.current.feelslike_c }}°C</p>
+            </div>
+            <div class="col-md-4">
+                <p>Humedad: {{ weatherData.current.humidity }}%</p>
+                <p>Viento: {{ weatherData.current.wind_kph }} km/h</p>
+            </div>
+        </div>
+    </div>
+</div>

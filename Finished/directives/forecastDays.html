@@ -1,0 +1,12 @@
+<div class="forecast-days">
+    <h3 class="text-center"><i class="fa fa-calendar"></i> {{ forecastData.length }}-Day Forecast</h3>
+    
+    <div class="row">
+        <div ng-repeat="day in forecastData" class="col-md-12">
+            <weather-panel 
+                weather-data="day" 
+                >
+            </weather-panel>
+        </div>
+    </div>
+</div>

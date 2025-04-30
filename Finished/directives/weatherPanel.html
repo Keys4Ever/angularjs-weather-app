@@ -1,0 +1,64 @@
+
+<div class="panel"  
+     ng-class="{
+        'panel-warning': weatherData.day.condition.text == 'Sunny',
+        'panel-info': weatherData.day.condition.text == 'Cloudy',
+        'panel-primary': weatherData.day.condition.text == 'Rainy',
+        'panel-danger': weatherData.day.condition.text == 'Stormy',
+        'panel-success': weatherData.day.condition.text == 'Clear',
+        'panel-dark': weatherData.day.condition.text == 'Snowy',
+        'panel-default': !['Sunny', 'Cloudy', 'Rainy', 'Stormy', 'Clear', 'Snowy'].includes(weatherData.day.condition.text)
+     }">
+    
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ weatherData.date | date }}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 text-center">
+                <img ng-src="{{ weatherData.day.condition.icon }}" 
+                     class="img-responsive center-block" 
+                     style="width: 80px;">
+                <h4>{{ weatherData.day.condition.text }}</h4>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <p>Temperatura máxima: {{ weatherData.day.maxtemp_c }}°C</p>
+                <p>Temperatura mínima: {{ weatherData.day.mintemp_c }}°C</p>
+            </div>
+            
+            <div class="col-xs-12 col-sm-4">
+                <p>Humedad: {{ weatherData.day.avghumidity }}%</p>
+                <p>Viento: {{ weatherData.day.maxwind_kph }} km/h</p>
+            </div>
+        </div>
+    </div>
+    <div ng-if="expanded && weatherData.hour">
+        <div class="row">
+            <div class="col-xs-12" style="margin-left: 8px;">
+              <span class="label label-info">
+                <i class="fa fa-clock-o"></i>
+                Hourly Forecast
+              </span>
+            </div>
+          </div>  
+            <div class="row">
+            <div class="col-xs-12" style="overflow-x: auto;">
+                <div style="display: flex; min-width: 800px; overflow-x: auto;">
+                    <div ng-repeat="hour in weatherData.hour" class="text-center" style="min-width: 100px; margin: 0 5px;">
+                        <p>{{ hour.time | date:'HH:mm' }}</p>
+                        <img ng-src="{{ hour.condition.icon }}" style="width: 40px; height: 40px;">
+                        <p>{{ hour.temp_c }}°C</p>
+                        <p><i class="fa fa-tint"></i> {{ hour.chance_of_rain }}%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="text-center" style="margin-top: 10px; margin-bottom: 10px;">
+        <button class="btn btn-sm btn-default" ng-click="expanded = !expanded">
+            <i class="fa" ng-class="{'fa-chevron-down': !expanded, 'fa-chevron-up': expanded}"></i>
+            {{ expanded ? 'Hide Details' : 'Show Details' }}
+        </button>
+    </div>
+</div>
