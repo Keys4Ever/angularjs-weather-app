@@ -3,12 +3,12 @@ import sql from 'mssql';
 const config = {
     user: 'angular_user',
     password: '2112Asd',
-    server: 'localhost', // Try localhost instead of IP
+    server: 'localhost',
     database: 'AngularJs',
     options: {
         encrypt: false,
         trustServerCertificate: true,
-        enableArithAbort: true // Add this option
+        enableArithAbort: true
     }
 };
 

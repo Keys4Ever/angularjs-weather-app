@@ -2,11 +2,11 @@
 
 ## Features to Implement
 - [ ] Improve navbar.
-- [ ] Add functionality to compare forecasts for two cities:
-  - [ ] Show which city is colder/hotter.
-  - [ ] Display humidity percentage.
-  - [ ] Show time zone difference.
-  - [ ] Include "last updated" timestamp.
+- [x] Add functionality to compare forecasts for two cities:
+  - [x] Show which city is colder/hotter.
+  - [x] Display humidity percentage.
+  - [x] Show time zone difference.
+  - [x] Include "last updated" timestamp.
 
 ## Bug Fixes
 - [ ] **/forecast Page**: Fix issue where searching again without changing the number of days or date does not update the page.
