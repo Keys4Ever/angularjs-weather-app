@@ -1,4 +1,4 @@
-amgular.module('weatherApp')
+angular.module('weatherApp')
 .controller('loginController', function($scope, AuthService, $location) {
     $scope.credentials = { username: '', password: '' };
     $scope.error = null;

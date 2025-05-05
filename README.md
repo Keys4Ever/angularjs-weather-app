@@ -9,10 +9,7 @@
   - [x] Include "last updated" timestamp.
 
 ## Bug Fixes
-- [ ] **/forecast Page**: Fix issue where searching again without changing the number of days or date does not update the page.
+- [x] **/forecast Page**: Fix issue where searching again without changing the number of days or date does not update the page.
 
 ## Updates
-- [ ] Ensure the `maxDate` field is nullable:
-  - [ ] If `maxDate` is null:
-    - [ ] Set `maxDate = minDate`.
-    - [ ] Set `minDate = today`.
+- [x] Ensure the `endDate` field is nullable

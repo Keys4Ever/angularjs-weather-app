@@ -1,4 +1,4 @@
-amgular.module('weatherApp')
+angular.module('weatherApp')
 .controller('homeController', [
     '$scope', 'cityService', '$location', '$http', 'submitService', 'AuthService',
     function($scope, cityService, $location, $http, submitService, AuthService) {
@@ -31,7 +31,9 @@ amgular.module('weatherApp')
             const lon = pos.coords.longitude;
             const url = 
               `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
-  
+            
+              console.log('URL:', url);
+
             $http.get(url).then(function(res) {
               const addr = res.data.address;
               const localidad = addr.city || addr.town || addr.village || addr.county;
@@ -55,7 +57,7 @@ amgular.module('weatherApp')
       }
   
       $scope.$watchGroup(['startDate', 'endDate'], function([s,e]) {
-        if (new Date(s) > new Date(e)) {
+        if (new Date(s) > new Date(e) && e != '') {
           $scope.endDate = s;
         }
       });

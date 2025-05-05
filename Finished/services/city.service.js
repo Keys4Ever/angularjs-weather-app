@@ -5,9 +5,5 @@ angular.module('weatherApp')
     const today = new Date();
     this.startDate = today.toISOString().split('T')[0];
     
-    const endDate = new Date();
-    endDate.setDate(endDate.getDate() + 2);
-    this.endDate = endDate.toISOString().split('T')[0];
-    
-    console.log('cityService initialized with dates:', this.startDate, this.endDate);
+    const endDate = '' // se inicializa en un string vacío para que pueda ser nulleable xd
 });

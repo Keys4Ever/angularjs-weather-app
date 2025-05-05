@@ -1,4 +1,4 @@
-amgular.module('weatherApp').controller('forecastController', ['$scope', 'cityService', '$resource', '$routeParams', '$location', 'submitService', 'AuthService', 
+angular.module('weatherApp').controller('forecastController', ['$scope', 'cityService', '$resource', '$routeParams', '$location', 'submitService', 'AuthService', 
     function($scope, cityService, $resource, $routeParams, $location, submitService, AuthService) {
         if (!AuthService.getToken()) {
           $location.path('/');

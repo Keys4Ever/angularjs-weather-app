@@ -4,6 +4,7 @@ angular.module('weatherApp').directive('forecastInput', function() {
       templateUrl: 'directives/forecastInput.html',
       replace: true,
       scope: {
+        city      : '=city',
         city1     : '=city1',
         city2     : '=city2',
         startDate : '=startDate',
