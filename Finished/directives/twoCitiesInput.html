@@ -1,0 +1,39 @@
+<form
+  ng-submit="onSubmit()"
+  name="compareForm"
+  class="form-horizontal text-black"
+  style="margin-bottom: 10px"
+  novalidate
+>
+  <div class="row">
+    <div class="col-md-6">
+      <city-input
+        label="Ciudad 1"
+        city-model="city1"
+        placeholder="Ej: Madrid"
+        required="true"
+      ></city-input>
+
+      <date-input
+        label="Fecha a comparar"
+        date-model="startDate"
+        required="true"
+      ></date-input>
+    </div>
+
+    <div class="col-md-6">
+      <city-input
+        label="Ciudad 2"
+        city-model="city2"
+        placeholder="Ej: Barcelona"
+        required="true"
+      ></city-input>
+    </div>
+  </div>
+
+  <div class="form-group text-center" style="margin-top: 10px">
+    <button type="submit" class="btn btn-danger btn-lg">
+      <i class="fa fa-cloud"></i> Comparar Ciudades
+    </button>
+  </div>
+</form>

@@ -1,0 +1,43 @@
+<form
+  ng-submit="onSubmit()"
+  name="forecastForm"
+  class="form-horizontal text-black"
+  style="margin-bottom: 10px"
+  novalidate
+>
+  <div class="row">
+    <div class="col-md-10">
+      <city-input
+        label="Ciudad"
+        city-model="city"
+        placeholder="Ej: Madrid"
+        required="true"
+      ></city-input>
+    </div>
+
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-6">
+          <date-input
+            label="Fecha inicio"
+            date-model="startDate"
+            required="true"
+          ></date-input>
+        </div>
+        <div class="col-md-6">
+          <date-input
+            label="Fecha final"
+            date-model="endDate"
+            required="false"
+          ></date-input>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group text-center" style="margin-top: 10px">
+    <button type="submit" class="btn btn-danger btn-lg">
+      <i class="fa fa-cloud"></i> Obtener pronóstico
+    </button>
+  </div>
+</form>

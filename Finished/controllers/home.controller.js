@@ -55,7 +55,7 @@ angular.module('weatherApp')
           }
         );
       }
-  
+
       $scope.$watchGroup(['startDate', 'endDate'], function([s,e]) {
         if (new Date(s) > new Date(e) && e != '') {
           $scope.endDate = s;

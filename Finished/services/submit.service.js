@@ -2,7 +2,6 @@ angular.module('weatherApp').service('submitService', ['$location', 'cityService
     this.handleSubmit = function(scope, today) {
         if(!scope.endDate) {
             scope.endDate = scope.startDate;
-            scope.startDate = today; // <-- estoy seguro que hay que settearla a hoy? o debería settearla a == end date para que devuelva un solo día?
         }
 
         const start = new Date(scope.startDate);

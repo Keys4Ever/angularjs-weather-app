@@ -5,13 +5,14 @@
                 <h3 class="panel-title"><i class="fa fa-search"></i> Buscar pronóstico</h3>
             </div>
             <div class="panel-body">
-                <forecast-input
+                <two-dates-input
                     city="city"
                     start-date="startDate"
+                    min-date="minDate"
+                    max-date="maxDate"
                     end-date="endDate"
-                    is-compare="false"
-                    submit="submit()">
-                </forecast-input>
+                    on-submit="submit()">
+                </two-dates-input>
             </div>
         </div>
     </div>

@@ -3,8 +3,6 @@ angular.module('weatherApp')
     $scope.credentials = { username: '', password: '' };
     $scope.error = null;
 
-
-
     $scope.login = function() {
         AuthService.login($scope.credentials).then(() => {
             $location.path('/home');
