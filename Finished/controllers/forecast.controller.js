@@ -18,11 +18,6 @@ angular.module('weatherApp').controller('forecastController', ['$scope', 'citySe
         
         $scope.days = $routeParams.days;
 
-        if (!$scope.city || !$scope.startDate || !$scope.endDate) {
-            $location.path('/');
-            return;
-        }
-
         // Configurar fechas mínima/máxima (hoy + 14 días)
         const today = new Date();
         const in14Days = new Date();

@@ -14,13 +14,11 @@ angular.module('weatherApp').run(['$rootScope', '$location', 'AuthService', '$in
         return;
       }
       
-      const targetUrl = $location.url();
       event.preventDefault();
       
       AuthService.isTokenValid().then(
         function(isValid) {
           console.log('Token validation successful');
-          $location.url(targetUrl);
         },
         function(error) {
           console.error('Token validation failed:', error);
