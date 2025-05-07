@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-globe"></i> Comparador de Ciudades</h3>
+        <h3 class="panel-title"> Comparador de Ciudades</h3>
       </div>
       <div class="panel-body">
           <two-cities-input 
@@ -17,17 +17,17 @@
     </div>
 
     <div class="row" ng-if="comparisonResult">
-      <div class="col-md-6" ng-repeat="city in [city1, city2]">
+      <div class="col-md-6" ng-repeat="city in [comparisonCity1, comparisonCity2]">
         <div class="panel panel-info">
           <div class="panel-heading">
             <div class="row">
               <div class="col-xs-8">
                 <h3 class="panel-title">
-                  <i class="fa fa-building"></i> {{ comparisonResult.cards[city].name }}
+                 {{ comparisonResult.cards[city].name }}
                 </h3>
               </div>
               <div class="col-xs-4 text-right">
-                <small><i class="fa fa-clock-o"></i> {{ comparisonResult.lastUpdated[city] }}</small>
+                <small> {{ comparisonResult.lastUpdated[city] }}</small>
               </div>
             </div>
           </div>
@@ -37,17 +37,17 @@
             <div class="well well-sm">
               <div class="row">
                 <div class="col-xs-6">
-                  <p><i class="fa fa-thermometer-half"></i> <strong>Temperatura:</strong></p>
+                  <p> <strong>Temperatura:</strong></p>
                   <h4>{{ comparisonResult.cards[city].temp }}°C</h4>
                 </div>
                 <div class="col-xs-6">
-                  <p><i class="fa fa-tint"></i> <strong>Humedad:</strong></p>
+                  <p> <strong>Humedad:</strong></p>
                   <h4>{{ comparisonResult.cards[city].humidity }}%</h4>
                 </div>
               </div>
             </div>
-            <p><i class="fa fa-clock-o"></i> <strong>Zona horaria:</strong> {{ comparisonResult.cards[city].tz }}</p>
-            <p><i class="fa fa-calendar-check-o"></i> <strong>Fecha del pronóstico:</strong> {{ comparisonResult.cards[city].forecastDate }}</p>
+            <p><strong>Zona horaria:</strong> {{ comparisonResult.cards[city].tz }}</p>
+            <p><strong>Fecha del pronóstico:</strong> {{ comparisonResult.cards[city].forecastDate }}</p>
           </div>
         </div>
       </div>
@@ -55,25 +55,25 @@
       <div class="col-md-12">
         <div class="panel panel-success">
           <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-bar-chart"></i> Análisis Comparativo</h3>
+            <h3 class="panel-title"> Análisis Comparativo</h3>
           </div>
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6">
                 <div class="alert alert-danger">
-                  <h4><i class="fa fa-fire"></i> Ciudad más caliente:</h4>
+                  <h4> Ciudad más caliente:</h4>
                   <p>{{ comparisonResult.hotter.city }} con {{ comparisonResult.hotter.temperature }}</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="alert alert-info">
-                  <h4><i class="fa fa-snowflake-o"></i> Ciudad más fría:</h4>
+                  <h4> Ciudad más fría:</h4>
                   <p>{{ comparisonResult.colder.city }} con {{ comparisonResult.colder.temperature }}</p>
                 </div>
               </div>
             </div>
             <div class="well">
-              <h4><i class="fa fa-globe"></i> Diferencia de zona horaria:</h4>
+              <h4> Diferencia de zona horaria:</h4>
               <p class="lead text-center">{{ comparisonResult.timeZoneDifference }}h{{ comparisonResult.timeZoneDifference > 1 ? 's' : '' }}</p>
             </div>
           </div>
