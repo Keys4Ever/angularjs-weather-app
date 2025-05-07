@@ -24,6 +24,10 @@ angular.module('weatherApp')
             controller: 'compareController',
             requiresAuth: true,
           })
+          .when('/logout', {
+            templateUrl: 'pages/logout.html',
+            controller: 'logoutController',
+          })
           .otherwise({
             redirectTo: '/'
           });

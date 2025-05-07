@@ -84,7 +84,10 @@ angular.module('weatherApp')
       };
   
       this.logout = function() {
-        this.removeToken();
+        if(this.getToken()) {
+          this.removeToken();
+        }
+        console.log('Logged out successfully');
         $location.path('/');
       };
     });
