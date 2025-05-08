@@ -64,7 +64,7 @@ angular.module('weatherApp')
   
       $scope.submit = function() {
           const today = new Date();
-          submitService.handleSubmit($scope, today);
+          submitService.handleSubmit($scope, today); // TODO: implementar el service de weatherAPI
       };
     }
   ]);

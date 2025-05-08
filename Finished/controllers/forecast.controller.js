@@ -96,7 +96,7 @@ angular.module('weatherApp').controller('forecastController', ['$scope', 'citySe
                     $scope.loading = false;
                 }
             );
-        };
+        }; // TODO: implementar el service de weatherAPI
 
         $scope.loadWeatherData();
 
