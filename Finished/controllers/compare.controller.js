@@ -19,49 +19,49 @@ angular.module('weatherApp')
       weatherApiService.getMultiple(cities, options)
         .then(results => {
           console.log('Resultados de la API:', results);
-          const [res1, res2] = results;
-          const days1 = res1.forecast;
-          const days2 = res2.forecast;
+          const [resposeCity1, responseCity2] = results;
+          const days1 = resposeCity1.forecast;
+          const days2 = responseCity2.forecast;
           const dates = days1.map(f => f.date);
           $scope.comparisonResults = dates.map(date => {
-            const f1 = days1.find(f => f.date === date);
-            const f2 = days2.find(f => f.date === date);
+            const forecastCity1 = days1.find(f => f.date === date);
+            const forecastCity2 = days2.find(f => f.date === date);
             return {
               date,
               hotter: {
-                city: f1.day.avgtemp_c > f2.day.avgtemp_c ? $scope.city1 : $scope.city2,
-                temperature: Math.max(f1.day.avgtemp_c, f2.day.avgtemp_c) + '°C'
+                city: forecastCity1.day.avgtemp_c > forecastCity2.day.avgtemp_c ? $scope.city1 : $scope.city2,
+                temperature: Math.max(forecastCity1.day.avgtemp_c, forecastCity2.day.avgtemp_c) + '°C'
               },
               colder: {
-                city: f1.day.avgtemp_c < f2.day.avgtemp_c ? $scope.city1 : $scope.city2,
-                temperature: Math.min(f1.day.avgtemp_c, f2.day.avgtemp_c) + '°C'
+                city: forecastCity1.day.avgtemp_c < forecastCity2.day.avgtemp_c ? $scope.city1 : $scope.city2,
+                temperature: Math.min(forecastCity1.day.avgtemp_c, forecastCity2.day.avgtemp_c) + '°C'
               },
               humidity: {
-                [$scope.city1]: f1.day.avghumidity + '%',
-                [$scope.city2]: f2.day.avghumidity + '%'
+                [$scope.city1]: forecastCity1.day.avghumidity + '%',
+                [$scope.city2]: forecastCity2.day.avghumidity + '%'
               },
               lastUpdated: {
-                [$scope.city1]: res1.current.last_updated,
-                [$scope.city2]: res2.current.last_updated
+                [$scope.city1]: resposeCity1.current.last_updated,
+                [$scope.city2]: responseCity2.current.last_updated
               },
               cards: {
                 [$scope.city1]: {
                   name: $scope.city1,
-                  temp: f1.day.avgtemp_c,
-                  condition: f1.day.condition.text,
-                  icon: f1.day.condition.icon,
-                  humidity: f1.day.avghumidity,
-                  forecastDate: f1.date,
-                  tz: res1.location.tz_id
+                  temp: forecastCity1.day.avgtemp_c,
+                  condition: forecastCity1.day.condition.text,
+                  icon: forecastCity1.day.condition.icon,
+                  humidity: forecastCity1.day.avghumidity,
+                  forecastDate: forecastCity1.date,
+                  tz: resposeCity1.location.tz_id
                 },
                 [$scope.city2]: {
                   name: $scope.city2,
-                  temp: f2.day.avgtemp_c,
-                  condition: f2.day.condition.text,
-                  icon: f2.day.condition.icon,
-                  humidity: f2.day.avghumidity,
-                  forecastDate: f2.date,
-                  tz: res2.location.tz_id
+                  temp: forecastCity2.day.avgtemp_c,
+                  condition: forecastCity2.day.condition.text,
+                  icon: forecastCity2.day.condition.icon,
+                  humidity: forecastCity2.day.avghumidity,
+                  forecastDate: forecastCity2.date,
+                  tz: responseCity2.location.tz_id
                 }
               }
             };

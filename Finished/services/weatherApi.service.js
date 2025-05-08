@@ -15,7 +15,7 @@ angular.module('weatherApp')
       return $http.get(BASE_URL, {
         params: {
           key: API_KEY,
-          q: options.city,
+          q: options.city, // q = ciudad a buscar
           days: daysToRequest
         }
       }).then(res => {
