@@ -31,7 +31,7 @@ angular.module('weatherApp').service('mapService', function() {
         const map = L.map('map').setView([
             (coord1[0] + coord2[0]) / 2,
             (coord1[1] + coord2[1]) / 2
-        ], 6);
+        ], 2);
     
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'

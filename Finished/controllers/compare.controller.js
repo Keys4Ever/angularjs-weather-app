@@ -1,5 +1,5 @@
 angular.module('weatherApp')
-  .controller('compareController', function($scope, AuthService, weatherApiService) {
+  .controller('compareController', function($scope, AuthService, weatherApiService, mapService) {
     if (!AuthService.getToken()) return;
 
     $scope.isCompare = true;
@@ -72,5 +72,16 @@ angular.module('weatherApp')
           alert('No se pudo obtener el pronóstico para una o ambas ciudades.');
         })
         .finally(() => { $scope.loading = false; });
+
+        Promise.all([
+          new Promise(resolve => mapService.geocodeCity($scope.city1, resolve)),
+          new Promise(resolve => mapService.geocodeCity($scope.city2, resolve))
+        ]).then(([coord1, coord2]) => {
+          if (coord1 && coord2) {
+            mapService.renderMapWithTwoPoints(coord1, coord2, $scope.city1, $scope.city2);
+          } else {
+            console.warn('Una o ambas coordenadas son inválidas para el mapa.');
+          }
+        });
     };
   });
