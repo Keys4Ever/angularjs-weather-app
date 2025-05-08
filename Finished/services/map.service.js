@@ -31,7 +31,7 @@ angular.module('weatherApp').service('mapService', function() {
         const map = L.map('map').setView([
             (coord1[0] + coord2[0]) / 2,
             (coord1[1] + coord2[1]) / 2
-        ], 2);
+        ], 2); // TODO: Ajustar el zoom según la distancia entre los puntos - actualmente muestra casi todo el mapa 
     
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
