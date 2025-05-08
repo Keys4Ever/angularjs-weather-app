@@ -1,5 +1,5 @@
 angular.module('weatherApp')
-  .controller('compareController', function($scope, AuthService, weatherApiService, mapService) {
+  .controller('compareController', function($scope, AuthService, weatherApiService, mapService, $timeout) {
     if (!AuthService.getToken()) return;
 
     $scope.isCompare = true;
@@ -71,17 +71,22 @@ angular.module('weatherApp')
           console.error('Error en la API:', err);
           alert('No se pudo obtener el pronóstico para una o ambas ciudades.');
         })
-        .finally(() => { $scope.loading = false; });
+        .finally(() => { 
+          
+          $scope.loading = false;
+         });
 
-        Promise.all([
-          new Promise(resolve => mapService.geocodeCity($scope.city1, resolve)),
-          new Promise(resolve => mapService.geocodeCity($scope.city2, resolve))
-        ]).then(([coord1, coord2]) => {
-          if (coord1 && coord2) {
-            mapService.renderMapWithTwoPoints(coord1, coord2, $scope.city1, $scope.city2);
-          } else {
-            console.warn('Una o ambas coordenadas son inválidas para el mapa.');
-          }
-        });
+          Promise.all([
+            new Promise(resolve => mapService.geocodeCity($scope.city1, resolve)),
+            new Promise(resolve => mapService.geocodeCity($scope.city2, resolve))
+          ]).then(([coord1, coord2]) => {
+            if (coord1 && coord2) {
+              mapService.renderMap(coord1[0], coord1[1], $scope.city1, 'mapCity1');
+              mapService.renderMap(coord2[0], coord2[1], $scope.city2, 'mapCity2');
+            } else {
+              console.warn('Una o ambas coordenadas son inválidas para el mapa.');
+            }
+          });
+       
     };
   });

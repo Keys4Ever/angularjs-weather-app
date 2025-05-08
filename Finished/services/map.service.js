@@ -15,8 +15,8 @@ angular.module('weatherApp').service('mapService', function() {
             .catch(err => console.error('Error en geocoding:', err));
     };
 
-    this.renderMap = function(lat, lon, cityName) {
-        const map = L.map('map').setView([lat, lon], 10);
+    this.renderMap = function(lat, lon, cityName, id) {
+        const map = L.map(id).setView([lat, lon], 10);
         
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
