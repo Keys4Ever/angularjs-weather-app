@@ -1,5 +1,5 @@
-angular.module('weatherApp').controller('forecastController', ['$scope', 'cityService', '$resource', '$routeParams', '$location', 'submitService', 'AuthService', 
-    function($scope, cityService, $resource, $routeParams, $location, submitService, AuthService) {
+angular.module('weatherApp').controller('forecastController', ['$scope', 'cityService', '$resource', '$routeParams', '$location', 'submitService', 'AuthService', 'mapService', 
+    function($scope, cityService, $resource, $routeParams, $location, submitService, AuthService, mapService) {
         if (!AuthService.getToken()) {
           $location.path('/');
           return;
@@ -100,33 +100,8 @@ angular.module('weatherApp').controller('forecastController', ['$scope', 'citySe
 
         $scope.loadWeatherData();
 
-        function geocodeCity(cityName, callback) {
-            const url = 
-              `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}`;
-            fetch(url)
-              .then(res => res.json())
-              .then(results => {
-                if (results.length) {
-                  const { lat, lon } = results[0];
-                  callback([ parseFloat(lat), parseFloat(lon) ]);
-                } else {
-                  console.warn('No se encontró la ciudad');
-                }
-              })
-              .catch(err => console.error('Error en geocoding:', err));
-          }
-          
-          geocodeCity($scope.city, function([lat, lon]) {
-            const map = L.map('map').setView([lat, lon], 10);
-            
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              attribution: 
-                '© OpenStreetMap contributors'
-            }).addTo(map);
-          
-            L.marker([lat, lon]).addTo(map)
-              .bindPopup($scope.city)
-              .openPopup();
-          });
+        mapService.geocodeCity($scope.city, function([lat, lon]) {
+            mapService.renderMap(lat, lon, $scope.city);
+        });
     }
 ]);
