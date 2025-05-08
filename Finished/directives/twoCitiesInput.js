@@ -8,6 +8,7 @@ angular.module('weatherApp')
       city1: '=',
       city2: '=',
       startDate: '=',
+      endDate: '=',
       onSubmit: '&'
     }
   };
