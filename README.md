@@ -1,15 +1,23 @@
 # To-Do
 
-## Features to Implement
-- [ ] Improve navbar.
-- [x] Add functionality to compare forecasts for two cities:
-  - [x] Show which city is colder/hotter.
-  - [x] Display humidity percentage.
-  - [x] Show time zone difference.
-  - [x] Include "last updated" timestamp.
 
-## Bug Fixes
-- [x] **/forecast Page**: Fix issue where searching again without changing the number of days or date does not update the page.
+### Fácil
+- [x] Logout
+- [x] Separar el input de forecast
+- [ ] Mejorar UI en home y forecast sobre input
+- [ ] Añadir rango de fechas a comparar
+- [x] Arreglar input de ciudad, modifica UI - a medias
 
-## Updates
-- [x] Ensure the `endDate` field is nullable
+### Medio
+- [ ] Map en compare
+- [ ] Cuenta regresiva al quedar 2 minutos, con un modal que muestre que se está quedando sin tiempo. El modal debe tener un botón de logout o revalidar token.
+
+### Validación de Password
+- [ ] Dos mayúsculas no consecutivas y dos minúsculas como mínimo
+- [ ] Al menos un número
+- [ ] Al menos un carácter especial
+- [ ] Mínimo 8 caracteres
+
+#### Ejemplos
+- **No válido:** `AAbb`
+- **Válido:** `AbbA`
