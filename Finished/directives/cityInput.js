@@ -7,7 +7,8 @@ angular.module('weatherApp')
     scope: {
       cityModel: '=',
       label: '@',
-      required: '=?'
+      required: '=?',
+      isCompare: '=?',
     },
     link: function(scope, element, attrs) {
       if (scope.required === undefined) {

@@ -1,107 +1,56 @@
-angular.module('weatherApp').controller('forecastController', ['$scope', 'cityService', '$resource', '$routeParams', '$location', 'submitService', 'AuthService', 'mapService', 
-    function($scope, cityService, $resource, $routeParams, $location, submitService, AuthService, mapService) {
-        if (!AuthService.getToken()) {
-          $location.path('/');
-          return;
-        }
+angular.module('weatherApp').controller('forecastController', ['$scope', 'cityService', '$location', 'AuthService', 'mapService', 'weatherApiService', 
+    function($scope, cityService, $location, AuthService, mapService, weatherApiService) {
+      if (!AuthService.getToken()) {
+        $location.path('/');
+        return;
+      }
 
-        $scope.logout = function() {
-            AuthService.logout();
-        };
-      
+      $scope.logout = function() {
+        AuthService.logout();
+      };
+
+      if(cityService.city) {
         $scope.city = cityService.city;
         $scope.startDate = cityService.startDate;
         $scope.endDate = cityService.endDate;
-        
-        console.log('Initial startDate:', $scope.startDate);
-        console.log('Initial endDate:', $scope.endDate);
-        
-        $scope.days = $routeParams.days;
+      }
+      const today = new Date();
+      const in14Days = new Date();
+      in14Days.setDate(today.getDate() + 14);
+      $scope.minDate = today.toISOString().split('T')[0];
+      $scope.maxDate = in14Days.toISOString().split('T')[0];
+      //#TODO Use min and max
 
-        // Configurar fechas mínima/máxima (hoy + 14 días)
-        const today = new Date();
-        const in14Days = new Date();
-        in14Days.setDate(today.getDate() + 14);
-        
-        $scope.minDate = today.toISOString().split('T')[0];
-        $scope.maxDate = in14Days.toISOString().split('T')[0];
-
-        // sanity check
-        $scope.$watchGroup(['startDate', 'endDate'], function(newDates) {
-            if (new Date(newDates[0]) > new Date(newDates[1])) {
-                $scope.endDate = newDates[0];
-            }
-        });
-
-        // Función para enviar formulario
-        $scope.submit = function() {
-          const today = new Date();
-          submitService.handleSubmit($scope, today);
-      };
-
-        $scope.weatherResult = null;
-        $scope.filteredForecast = [];
-        $scope.loading = true;
-
-        var weatherAPI = $resource("https://api.weatherapi.com/v1/forecast.json", {
-            key: 'ed62753dd94d4e0fba7205631252804',
-            q: '@city',
-            days: '@days'
-        });
-
-        // Función para formatear fecha
-        function formatDateToString(dateValue) {
-            // Si ya es string en formato YYYY-MM-DD, devolverlo directamente
-            if (typeof dateValue === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateValue)) {
-                return dateValue;
-            }
-            
-            // Convertir a objeto Date y luego a string
-            try {
-                const dateObj = new Date(dateValue);
-                if (isNaN(dateObj.getTime())) {
-                    throw new Error('Invalid date');
-                }
-                return dateObj.toISOString().split('T')[0];
-            } catch (e) {
-                console.error('Error formatting date:', e, dateValue);
-                return null;
-            }
+      $scope.$watchGroup(['startDate', 'endDate'], function(newDates) {
+        if (new Date(newDates[0]) > new Date(newDates[1])) {
+          $scope.endDate = newDates[0];
         }
+      });
 
-        // Función para cargar los datos del clima
-        $scope.loadWeatherData = function() {
-            $scope.loading = true;
-            
-            const startDateStr = formatDateToString($scope.startDate);
-            const endDateStr = formatDateToString($scope.endDate);
-            
- 
-            
-            weatherAPI.get(
-                { q: $scope.city, days: Number($scope.days) + 2 },
-                function(data) {
-                    $scope.weatherResult = data;
-                    
-                    $scope.filteredForecast = data.forecast.forecastday.filter(day => {
-                        const result = day.date >= startDateStr && day.date <= endDateStr;
-                        return result;
-                    });
-                    
-                    $scope.loading = false;
-                },
-                function(error) {
-                    console.error('API error:', error);
-                    alert("Error: " + (error.data?.error?.message || "No se pudo obtener el pronóstico"));
-                    $scope.loading = false;
-                }
-            );
-        }; // TODO: implementar el service de weatherAPI
+      $scope.weatherResult = null;
+      $scope.filteredForecast = [];
+      $scope.loading = false;
 
-        $scope.loadWeatherData();
+      $scope.submit = function() {
+        $scope.loading = true;
+        const opts = { city: $scope.city, startDate: $scope.startDate, endDate: $scope.endDate };
 
-        mapService.geocodeCity($scope.city, function([lat, lon]) {
-            mapService.renderMap(lat, lon, $scope.city);
-        });
+        weatherApiService.getWeather(opts)
+          .then(result => {
+            $scope.weatherResult = { location: result.location, current: result.current };
+            $scope.filteredForecast = result.forecast;
+            $scope.requestedDays = result.requestedDays;
+
+            mapService.geocodeCity($scope.city, function([lat, lon]) {
+                mapService.renderMap(lat, lon, $scope.city, 'map');
+            });
+          })
+          .catch(err => {
+            alert('Error: ' + (err.data?.error?.message || err));
+          })
+          .finally(() => {
+            $scope.loading = false;
+          });
+      };
     }
-]);
+  ]);

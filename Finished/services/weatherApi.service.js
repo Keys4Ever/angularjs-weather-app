@@ -5,9 +5,6 @@ angular.module('weatherApp')
     const MAX_DAYS = 14;
 
     this.getWeather = function(options) {
-      if (!options.city || !options.startDate) {
-        return $q.reject('city y startDate son requeridos');
-      }
       const target = options.endDate || options.startDate;
       let daysToRequest = utilsService.calculateDaysDiff(target);
       daysToRequest = Math.min(daysToRequest, MAX_DAYS);
@@ -23,8 +20,8 @@ angular.module('weatherApp')
         const startStr = utilsService.formatDateToString(options.startDate);
         const endStr   = utilsService.formatDateToString(options.endDate || options.startDate);
         console.log('Filtered dates:', startStr, endStr);
-        const filtered = data.forecast.forecastday.filter(f => (
-          f.date >= startStr && f.date <= endStr
+        const filtered = data.forecast.forecastday.filter(forecast => (
+          forecast.date >= startStr && forecast.date <= endStr
         ));
         console.log('Filtered forecast:', filtered);
         return {

@@ -9,12 +9,12 @@ angular.module('weatherApp')
             templateUrl: 'pages/register.html',
             controller: 'registerController'
         })
-        .when('/home', {
+        .when('/ddddd', {
             templateUrl: 'pages/home.html',
             controller: 'homeController',
             requiresAuth: true
           })
-          .when('/forecast/:days', {
+          .when('/home', {
             templateUrl: 'pages/forecast.html',
             controller: 'forecastController',
             requiresAuth: true
