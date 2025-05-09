@@ -8,6 +8,7 @@ angular.module('weatherApp')
       dateModel: '=',
       label: '@',
       required: '=?',
+      isCompare: '=?',
     },
     link: function(scope, element, attrs) {
       scope.$watch('dateModel', function(newVal) {

@@ -21,12 +21,6 @@ angular.module('weatherApp').controller('forecastController', ['$scope', 'citySe
       $scope.maxDate = in14Days.toISOString().split('T')[0];
       //#TODO Use min and max
 
-      $scope.$watchGroup(['startDate', 'endDate'], function(newDates) {
-        if (new Date(newDates[0]) > new Date(newDates[1])) {
-          $scope.endDate = newDates[0];
-        }
-      });
-
       $scope.weatherResult = null;
       $scope.filteredForecast = [];
       $scope.loading = false;
